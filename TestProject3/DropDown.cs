@@ -12,11 +12,20 @@ namespace TestProject3
     {
         IWebDriver driver;
 
+        ChromeOptions options = new ChromeOptions();
+
         [SetUp]
         public void SetUp()
         {
+            options.AddArguments("--headless");
+            options.AddArguments("--no-sandbox");
+            options.AddArguments("--disable-dev-shm-usage");
+            options.AddArguments("--disable-gpu");
+            options.AddArguments("--window-size=1920,1080");
+            options.AddArguments("--disable-extensions");
+
             // Create object of ChromeDriver
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(options);
 
             // Add implicit wait
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);

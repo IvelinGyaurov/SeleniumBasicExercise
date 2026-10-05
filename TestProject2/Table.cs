@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 
 namespace TestProject2
@@ -10,11 +11,20 @@ namespace TestProject2
     {
         IWebDriver driver;
 
+        ChromeOptions options = new ChromeOptions();
+
         [SetUp]
         public void SetUp()
         {
             // Create object of ChromeDriver
-            driver = new ChromeDriver();
+            options.AddArguments("headless");
+            options.AddArguments("no-sandbox");
+            options.AddArguments("disable-dev-shm-usage");
+            options.AddArguments("disable-gpu");
+            options.AddArguments("windows-size=1920x1080");
+            options.AddArguments("disable-extensions");
+            options.AddArguments("remote-debugging-port=9222");
+            driver = new ChromeDriver(options);
 
             // Add implicit wait
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);

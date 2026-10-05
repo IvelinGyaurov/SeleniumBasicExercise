@@ -16,11 +16,19 @@ namespace TestProject1
         IWebElement calcBtn;
         IWebElement resetBtn;
         IWebElement divResult;
+        ChromeOptions options = new ChromeOptions();
 
         [OneTimeSetUp]
         public void SetUp()
         {
-            driver = new ChromeDriver();
+            options.AddArguments("--headless");
+            options.AddArguments("--no-sandbox");
+            options.AddArguments("--disable-dev-shm-usage");
+            options.AddArguments("--disable-gpu");
+            options.AddArguments("--window-size=1920,1080");
+            options.AddArguments("--disable-extensions");
+
+            driver = new ChromeDriver(options);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Url = "https://calculatorhtml.onrender.com/";
 
